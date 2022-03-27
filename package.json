@@ -1,23 +1,27 @@
 {
-  "name": "node-y-express",
-  "version": "1.0.0",
-  "description": "Prueba de RestApi con Node y Express",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Horus98/Node-y-Express.js.git"
-  },
-  "keywords": [],
-  "author": "Horus Moro",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Horus98/Node-y-Express.js/issues"
-  },
-  "homepage": "https://github.com/Horus98/Node-y-Express.js#readme",
-  "dependencies": {
-    "express": "^4.17.3"
-  }
+    "name": "node-y-express",
+    "version": "1.0.0",
+    "description": "Prueba de RestApi con Node y Express",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Horus98/Node-y-Express.js.git"
+    },
+    "keywords": [],
+    "author": "Horus Moro",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Horus98/Node-y-Express.js/issues"
+    },
+    "homepage": "https://github.com/Horus98/Node-y-Express.js#readme",
+    "dependencies": {
+        "express": "^4.17.3"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
 }
