@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 import User from '../Models/user.js'
 
 let users = []
@@ -24,29 +25,32 @@ export const getUser = async(req, res) => {
     }
 }
 
-export const deleteUser = (req, res) => {
+export const deleteUser = async(req, res) => {
     const { id } = req.params
-    users = users.filter((user) => id != user.id)
-    res.send(`User with ID: ${id} was deleted!`)
+    try {
+        await User.findByIdAndDelete(id)
+        return res.status(200).json({ id: id })
+    } catch (error) {
+        return res.status(404).json({ message: "No se ha podido eliminar al usuario" })
+    }
 }
 
-export const updateUser = (req, res) => {
-    const { id } = req.params
-    const { firstName, lastName, age, address } = req.body
-    const user = users.find((user) => user.id == id)
-
-    if (firstName) user.firstName = firstName
-    if (lastName) user.lastName = lastName
-    if (age) user.age = age
-    if (address) user.address = address
-
-    res.send(`User with ID: ${id} was updated!`)
+export const updateUser = async(req, res) => {
+    const { id: _id } = req.params
+    if (!mongoose.Types.ObjectId.isValid(_id))
+        return res.status(404).json({ message: `No user with id: ${_id}` })
+    const userUpdate = req.body
+    try {
+        const updatedUser = await User.findByIdAndUpdate(_id, userUpdate, { new: true })
+        return res.status(200).json(updatedUser)
+    } catch (error) {
+        return res.status(404).json({ message: "No se pudo actualizar al usuario!" })
+    }
 }
 
 export const getUsers = async(req, res) => {
     try {
         const users = await User.find()
-        console.log(users)
         return res.status(200).json(users)
     } catch (error) {
         return res.status(404).json({ message: error.message })
