@@ -13,10 +13,15 @@ export const createUser = async(req, res) => {
     }
 }
 
-export const getUser = (req, res) => {
+export const getUser = async(req, res) => {
     const { id } = req.params
-    const foundUser = users.find((user) => id === user.id)
-    res.send(foundUser)
+    try {
+        const user = await User.findById(id).exec();
+        return res.status(200).json(user)
+
+    } catch (error) {
+        return res.status(404).json({ message: error.message })
+    }
 }
 
 export const deleteUser = (req, res) => {
