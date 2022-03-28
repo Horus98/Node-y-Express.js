@@ -57,7 +57,6 @@ export const getUsers = async(req, res) => {
 
 export const getUserNamed = async(req, res) => {
     const { firstName } = req.params
-    console.log(firstName)
     try {
         const users = await User.find({ firstName: firstName }).exec()
         return res.status(200).json(users)
