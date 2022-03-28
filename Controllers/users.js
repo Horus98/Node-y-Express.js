@@ -54,3 +54,14 @@ export const getUsers = async(req, res) => {
         return res.status(404).json({ message: error.message })
     }
 }
+
+export const getUserNamed = async(req, res) => {
+    const { firstName } = req.params
+    console.log(firstName)
+    try {
+        const users = await User.find({ firstName: firstName }).exec()
+        return res.status(200).json(users)
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
+    }
+}

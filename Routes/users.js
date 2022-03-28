@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, getUser, deleteUser, updateUser, getUsers } from "../Controllers/users.js";
+import { createUser, getUser, deleteUser, updateUser, getUsers, getUserNamed } from "../Controllers/users.js";
 
 const router = express.Router();
 
@@ -15,5 +15,7 @@ router.delete("/:id", deleteUser)
 
 // Modificacion parcial del usuario (PATCH)
 router.patch("/:id", updateUser)
+
+router.get("/name/:firstName", getUserNamed)
 
 export default router;
