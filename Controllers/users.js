@@ -1,5 +1,3 @@
-//import { use } from 'express/lib/application'
-import { v4 as uuidv4 } from 'uuid'
 import User from '../Models/user.js'
 
 let users = []
