@@ -1,8 +1,6 @@
 import mongoose from 'mongoose'
 import User from '../Models/user.js'
 
-let users = []
-
 export const createUser = async(req, res) => {
     const user = req.body
     const newUser = new User(user)
