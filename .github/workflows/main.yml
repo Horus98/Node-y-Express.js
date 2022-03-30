@@ -24,3 +24,6 @@ jobs:
 
       # Run tests
       - run: npm test
+
+      - name: SHOW CONNECTION_URL
+        run: echo ${{ secrets.CONNECTION_URL }}
