@@ -16,11 +16,14 @@ app.get("/", (req, res) => {
     res.send("Hello from homePage!")
 })
 
-//const CONNECTION_URL = "mongodb+srv://admin:admin@cluster0.ex5zz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 const PORT = process.env.PORT || 5000
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.ex5zz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+mongoose.connect(process.env.CONNECTION_URL)
     .then(() => app.listen(PORT, () => console.log(`Server running on port: http://localhost:${PORT}`)))
     .catch((error) => console.log(error.message))
 
-export default app
+const closeConnection = () => {
+    mongoose.connection.close()
+}
+
+export  { app, closeConnection }
