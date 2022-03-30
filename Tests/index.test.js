@@ -24,3 +24,5 @@ describe("POST /users", () => {
         expect(responseUser.status).toBe(200)
     })
 })
+
+console.log("Prbando Actions")
