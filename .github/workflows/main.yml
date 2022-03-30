@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      CONNECTION_URL: "{{ secrets.CONNECTION_URL }}"
-      
+      CONNECTION_URL: ${{ secrets.CONNECTION_URL }}
+
     steps:
       # Checkout the Repo
       - uses: actions/checkout@v2
