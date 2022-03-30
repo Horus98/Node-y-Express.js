@@ -4,11 +4,11 @@ import request from "supertest"
 //Ejecucion Test
 //set NODE_OPTIONS=--experimental-vm-modules && npx jest --detectOpenHandles
 
-describe("GET /users", () => {
+ describe("GET /users", () => {
     test("Should respond with status 200", async() => {
         const response = await request(app).get("/users").send()
     },30000)
-})
+}) 
 
 describe("POST /users", () => {
     test("Should respond with status 200", async() => {
@@ -22,7 +22,8 @@ describe("POST /users", () => {
         const idUser = response.body._id
         const responseUser = await request(app).get("/users/" + idUser).send()
         expect(responseUser.status).toBe(200)
-    },30000)
+    })
 })
+
 
 console.log("Andara?...")
