@@ -43,8 +43,7 @@ describe("POST invalid User", () => {
     test("Should respond with status 409", async() => {
         const emptyUser = {}
         const response = await request(app).post("/users").send(emptyUser)
-        //expect(response.status).toBe(409)
-        expect(response.status).toBe(500)
+        expect(response.status).toBe(409)
     })
 })
 afterAll(() => {
