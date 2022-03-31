@@ -16,6 +16,8 @@ export const getUser = async(req, res) => {
     const { id } = req.params
     try {
         const user = await User.findById(id).exec();
+        if(user === null)
+            return res.status(404).json({message: `El usuario con el ID: ${id}, no existe en la base de datos!`})
         return res.status(200).json(user)
 
     } catch (error) {
@@ -26,7 +28,9 @@ export const getUser = async(req, res) => {
 export const deleteUser = async(req, res) => {
     const { id } = req.params
     try {
-        await User.findByIdAndDelete(id)
+        const response = await User.findByIdAndDelete(id)
+        if(response === null)
+            return res.status(404).json({message: `El usuario con el ID: ${id}, no existe en la base de datos!`})
         return res.status(200).json({ id: id })
     } catch (error) {
         return res.status(404).json({ message: "No se ha podido eliminar al usuario" })
