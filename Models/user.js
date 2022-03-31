@@ -1,10 +1,11 @@
 import mongoose from "mongoose"
 
 const userSchema = mongoose.Schema({
-    "firstName": String,
-    "lastName": String,
-    "age": Number,
-    "address": String,
+    
+    "firstName": { type : String, required : true },
+    "lastName": { type : String, required : true },
+    "age": { type : Number, required : true },
+    "address": { type : String, required : true },
     "createdAt": {
         type: Date,
         default: new Date()
