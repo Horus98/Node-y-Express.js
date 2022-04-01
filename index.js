@@ -3,6 +3,11 @@ import usersRoutes from "./Routes/users.js"
 import mongoose from "mongoose"
 import cors from "cors"
 import dotenv from "dotenv"
+import rateLimit from 'express-rate-limit'
+const limiter = rateLimit({
+	windowMs: 1 * 60 * 1000, // 15 minutes
+	max: 10, // Limit each IP to 10 requests per `window` (here, per minute)
+})
 
 const app = express()
 
@@ -11,6 +16,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use("/users", usersRoutes)
+// Apply the rate limiting middleware to all requests
+app.use(limiter)
 
 app.get("/", (req, res) => {
     console.log('Testing console in server')
