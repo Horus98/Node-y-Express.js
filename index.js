@@ -11,7 +11,7 @@ const limiter = rateLimit({
 
 const app = express()
 
-dotenv.config();
+dotenv.config()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
