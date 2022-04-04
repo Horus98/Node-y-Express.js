@@ -60,22 +60,22 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
 
-  emial:
+  email:
+    runs-on: ubuntu-latest
     if: always()
-    uses: dawidd6/action-send-mail@v2
-    with:
-      # mail server settings
-      server_address: smtp.gmail.com
-      server_port: 465
-      # user credentials
-      username: ${{ secrets.EMAIL_USERNAME }}
-      password: ${{ secrets.EMAIL_PASSWORD }}
-      # email subject
-      subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-      # email body as text
-      body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-      # comma-separated string, send email to
-      to: ${{ secrets.EMAIL_TO_USERNAME }}
-      # from email name
-      from: Action notify
-  
+    steps:
+      - uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          # user credentials
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          # email subject
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+          # email body as text
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          # comma-separated string, send email to
+          to: ${{ secrets.EMAIL_TO_USERNAME }}
+          # from email name
+          from: Action notify
