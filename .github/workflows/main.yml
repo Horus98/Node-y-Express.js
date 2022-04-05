@@ -80,5 +80,5 @@ jobs:
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
           from: Action notify
-        run: echo "${{ toJson(github) }}"
+          run: echo "${{ toJson(github) }}"
           
