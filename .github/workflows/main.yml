@@ -80,7 +80,7 @@ jobs:
           subject: Worflow notify
           # email body as text
           # 
-          body: el resultado de los jobs fue el siguiente, Deploy = ${{needs.deploy.result}}, Test = ${{needs.test.result}}, Analisis de codigo = ${{needs.eslint.result}}
+          body: el resultado de los jobs fue el siguiente, Deploy = ${{deploy.result}}, Test = ${{test.result}}, Analisis de codigo = ${{eslint.result}}
           # comma-separated string, send email to
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
