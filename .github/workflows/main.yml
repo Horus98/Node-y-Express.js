@@ -76,7 +76,8 @@ jobs:
           # email subject
           subject: Worflow notify
           # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+          # 
+          body: el resultado de los jobs fue el siguiente, Deploy = ${{needs.deploy.result}}, Test = ${{needs.tests.result}}, Analisis de codigo = ${{needs.ESlint.result}}
           # comma-separated string, send email to
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
