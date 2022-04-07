@@ -26,7 +26,7 @@ jobs:
       # Run tests
       - run: npm test
       - run: npm run lint
-      - env:
+        env:
           $Test_status: ${{ job.status }}
 
 
@@ -41,8 +41,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-      - env:
-          $Deploy_status: ${{ job.status }}
+    env:
+        $Deploy_status: ${{ job.status }}
           
   email:
     runs-on: ubuntu-latest
