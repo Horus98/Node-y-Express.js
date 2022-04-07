@@ -78,7 +78,7 @@ jobs:
           # email subject
           subject: Worflow notify
           # email body as text
-          body: env.WORKFLOW_CONCLUSION
+          body: ${{ env.WORKFLOW_CONCLUSION }}
           # comma-separated string, send email to
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
