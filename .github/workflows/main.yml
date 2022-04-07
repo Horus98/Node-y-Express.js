@@ -58,19 +58,6 @@ jobs:
 
 
 
-  deploy:
-    name: deploy
-    runs-on: ubuntu-latest
-    needs: [tests]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-    outputs:
-      deploy-status: ${{ job.status }}
     
           
 
@@ -89,7 +76,7 @@ jobs:
           # email subject
           subject: Worflow notify
           # email body as text
-          body: el resultado de los jobs fue el siguiente, Deploy = ${{needs.deploy.outputs.deploy-status}}, Test = ${{needs.tests.outputs.test-status}}, Analisis de codigo = ${{needs.eslint.outputs.eslint-status}}
+          body:  ${{needs.tests.outputs.test-status}} ${{needs.eslint.outputs.eslint-status}}
           # comma-separated string, send email to
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
