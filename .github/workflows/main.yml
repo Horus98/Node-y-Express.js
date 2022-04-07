@@ -44,8 +44,8 @@ jobs:
     needs: [deploy]
     if: always()
     steps:
-      - uses: dawidd6/action-send-mail@v3
       - uses: technote-space/workflow-conclusion-action@v2
+      - uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
