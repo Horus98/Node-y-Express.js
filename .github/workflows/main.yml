@@ -26,6 +26,9 @@ jobs:
       # Run tests
       - run: npm test
       - run: npm run lint
+      - env:
+          $Test_status: ${{ job.status }}
+
 
   deploy:
     name: deploy
@@ -38,6 +41,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+      - env:
+          $Deploy_status: ${{ job.status }}
           
   email:
     runs-on: ubuntu-latest
@@ -55,7 +60,8 @@ jobs:
           # email subject
           subject: Worflow notify
           # email body as text
-          body: The workflow end with status ( ${{ env.WORKFLOW_CONCLUSION }} )
+          #body: The workflow end with status ( ${{ env.WORKFLOW_CONCLUSION }} )
+          body: The deploy job ends with status ( $Deploy_status ) and test job ends with status ( $Test_status )
           # comma-separated string, send email to
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
