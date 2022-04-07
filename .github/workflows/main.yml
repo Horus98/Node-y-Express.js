@@ -27,6 +27,9 @@ jobs:
       # Run tests
       - run: npm test
 
+    outputs:
+      job-status: ${{ job.status }}
+
   ESlint:
     name: eslint
     runs-on: ubuntu-latest
@@ -50,6 +53,10 @@ jobs:
       # Run tests
       - run: npm run lint
 
+    outputs:
+      job-status: ${{ job.status }}
+
+
 
   deploy:
     name: deploy
@@ -62,6 +69,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+    outputs:
+      job-status: ${{ job.status }}s
           
 
   email:
@@ -79,8 +88,7 @@ jobs:
           # email subject
           subject: Worflow notify
           # email body as text
-          # 
-          body: el resultado de los jobs fue el siguiente, Deploy = ${{deploy.result}}, Test = ${{test.result}}, Analisis de codigo = ${{eslint.result}}
+          body: el resultado de los jobs fue el siguiente, Deploy = ${{needs.deploy.outputs.job-status}}, Test = ${{needs.test.outputs.job-status}}, Analisis de codigo = ${{needs.eslint.outputs.job-status}}
           # comma-separated string, send email to
           to: ${{ secrets.EMAIL_TO_USERNAME }}
           # from email name
