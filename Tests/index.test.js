@@ -46,6 +46,21 @@ describe('POST invalid User', () => {
         expect(response.status).toBe(409)
     })
 })
+
+describe('GET new User', () => {
+    test('Should respond with status 200', async () => {
+        const newUser = {
+            firstName: 'Obtener',
+            lastName: 'Usuario',
+            address: 'GET method',
+            age: 200
+        }
+        const responsePost = await request(app).post('/users').send(newUser)
+        const idUser = responsePost.body._id
+        const responseGet = await request(app).get('/users/' + idUser).send()
+        expect(responseGet.status).toBe(200)
+    })
+})
 afterAll(() => {
     return closeConnection()
 })
