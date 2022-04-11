@@ -1,9 +1,12 @@
 import request from 'supertest'
 import { app, closeConnection } from '../index.js'
+import dotenv from 'dotenv'
+dotenv.config()
+const token = process.env.TOKEN_TEST
 
 describe('GET /users', () => {
     test('Should respond with status 200', async () => {
-        const response = await request(app).get('/users').send()
+        const response = await request(app).get('/users').set('token', token).send()
         expect(response.status).toBe(200)
     }, 30000)
 })
@@ -16,9 +19,9 @@ describe('POST /users', () => {
             address: 'Av.Siempre Viva',
             age: 99
         }
-        const response = await request(app).post('/users').send(user)
+        const response = await request(app).post('/users').set('token', token).send(user)
         const idUser = response.body._id
-        const responseUser = await request(app).get('/users/' + idUser).send()
+        const responseUser = await request(app).get('/users/' + idUser).set('token', token).send()
         expect(responseUser.status).toBe(200)
     })
 })
@@ -31,10 +34,10 @@ describe('DELETE /users', () => {
             address: 'Av.Siempre Viva',
             age: 200
         }
-        const response = await request(app).post('/users').send(user)
+        const response = await request(app).post('/users').set('token', token).send(user)
         const idUser = response.body._id
-        await request(app).delete('/users/' + idUser).send()
-        const userDeleted = await request(app).get('/users/' + idUser).send()
+        await request(app).delete('/users/' + idUser).set('token', token).send()
+        const userDeleted = await request(app).get('/users/' + idUser).set('token', token).send()
         expect(userDeleted.status).toBe(404)
     })
 })
@@ -42,7 +45,7 @@ describe('DELETE /users', () => {
 describe('POST invalid User', () => {
     test('Should respond with status 409', async () => {
         const emptyUser = {}
-        const response = await request(app).post('/users').send(emptyUser)
+        const response = await request(app).post('/users').set('token', token).send(emptyUser)
         expect(response.status).toBe(409)
     })
 })
@@ -55,9 +58,9 @@ describe('GET new User', () => {
             address: 'GET method',
             age: 200
         }
-        const responsePost = await request(app).post('/users').send(newUser)
+        const responsePost = await request(app).post('/users').set('token', token).send(newUser)
         const idUser = responsePost.body._id
-        const responseGet = await request(app).get('/users/' + idUser).send()
+        const responseGet = await request(app).get('/users/' + idUser).set('token', token).send()
         expect(responseGet.status).toBe(200)
     })
 })

@@ -9,6 +9,8 @@ jobs:
 
     env:
       CONNECTION_URL: ${{ secrets.CONNECTION_URL }}
+      TOKEN_KEY: ${{ secrets.TOKEN_KEY }}
+      TOKEN_TEST: ${{ secrets.TOKEN_TEST }}
 
     steps:
       # Checkout the Repo
