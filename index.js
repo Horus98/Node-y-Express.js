@@ -1,9 +1,11 @@
 import express from 'express'
 import usersRoutes from './Routes/users.js'
+import authUseroutes from './Routes/authUser.js'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import rateLimit from 'express-rate-limit'
+
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 15 minutes
     max: 10 // Limit each IP to 10 requests per `window` (here, per minute)
@@ -16,6 +18,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use('/users', usersRoutes)
+app.use('/auth', authUseroutes)
+
 // Apply the rate limiting middleware to all requests
 app.use(limiter)
 
