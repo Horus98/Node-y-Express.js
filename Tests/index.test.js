@@ -64,6 +64,21 @@ describe('GET new User', () => {
         expect(responseGet.status).toBe(200)
     })
 })
+
+describe('VERIFY TOKEN', () => {
+    test('Should be the same tokens', async () => {
+        const user = {
+            email: 'testtokenemail@gmail.com',
+            password: 'testtokenpassword'
+        }
+        const response = await request(app).post('/auth/register').send(user)
+        const token = response.body.token
+        const responseLogin = await request(app).post('/auth/login').send(user)
+        const tokenLogin = responseLogin.body.token
+        expect(token).toBe(tokenLogin)
+    })
+})
+
 afterAll(() => {
     return closeConnection()
 })
