@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
 dotenv.config()
 
-export const register = async(req, res) => {
+export const register = async (req, res) => {
     const { email, password } = req.body
     if (!email || !password) {
         return res.status(409).send({ message: 'Faltan datos' })
@@ -24,7 +24,7 @@ export const register = async(req, res) => {
         })
 }
 
-export const login = async(req, res) => {
+export const login = async (req, res) => {
     const { email, password } = req.body
     if (!email || !password) {
         return res.status(409).send({ message: 'Debe ingresar email y contraseña' })
@@ -41,7 +41,7 @@ export const login = async(req, res) => {
     return res.status(200).send({ message: 'Usuario logueado', token: token })
 }
 
-export const authUsers = async(req, res) => {
+export const authUsers = async (req, res) => {
     try {
         const users = await AuthUser.find()
         return res.status(200).json(users)
