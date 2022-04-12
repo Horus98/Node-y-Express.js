@@ -88,6 +88,18 @@ describe('INVALID TOKEN', () => {
     })
 })
 
+describe('User already exist', () => {
+    test('Should respond with status 409', async () => {
+        const user = {
+            email: generateRandomString() + '@gmail.com',
+            password: generateRandomString()
+        }
+        await request(app).post('/auth/register').send(user)
+        const response2 = await request(app).post('/auth/register').send(user)
+        expect(response2.status).toBe(409)
+    })
+})
+
 afterAll(() => {
     return closeConnection()
 })
