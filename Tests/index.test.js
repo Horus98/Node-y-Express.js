@@ -100,6 +100,14 @@ describe('User already exist', () => {
     })
 })
 
+describe('Incomplete information create user', () => {
+    test('Should respond with status 409', async () => {
+        const user = {}
+        const response = await request(app).post('/auth/register').send(user)
+        expect(response.status).toBe(409)
+    })
+})
+
 afterAll(() => {
     return closeConnection()
 })
