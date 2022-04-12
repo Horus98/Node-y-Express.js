@@ -80,6 +80,14 @@ describe('VERIFY TOKEN', () => {
     })
 })
 
+describe('INVALID TOKEN', () => {
+    test('Should respond with status 401', async () => {
+        const invalidToken = 'This is an invalid token'
+        const respose = await request(app).get('/users').set('token', invalidToken).send()
+        expect(respose.status).toBe(401)
+    })
+})
+
 afterAll(() => {
     return closeConnection()
 })
