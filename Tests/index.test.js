@@ -3,6 +3,7 @@ import { app, closeConnection } from '../index.js'
 import dotenv from 'dotenv'
 dotenv.config()
 const token = process.env.TOKEN_TEST
+const generateRandomString = (length = 12) => Math.random().toString(20).substr(2, length)
 
 describe('GET /users', () => {
     test('Should respond with status 200', async () => {
@@ -68,8 +69,8 @@ describe('GET new User', () => {
 describe('VERIFY TOKEN', () => {
     test('Should be the same tokens', async () => {
         const user = {
-            email: 'testtokenemail@gmail.com',
-            password: 'testtokenpassword'
+            email: generateRandomString() + '@gmail.com',
+            password: generateRandomString()
         }
         const response = await request(app).post('/auth/register').send(user)
         const token = response.body.token
